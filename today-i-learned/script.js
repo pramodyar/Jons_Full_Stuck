@@ -11,13 +11,15 @@ btn.addEventListener("click", function () {
   }
 });
 
-// THIS IS FOR THE TESTING...................................................
+// //THIS IS FOR THE TESTING AND NOTES/////////////////////////////
 
 // let votesInteresting = 20;
 // let votesMindBlowing = 5;
 // let votesFalse = 16;
 
 // let totalUpVotes = votesInteresting + votesMindBlowing;
+
+/////////TERNARY OPERATOR///////////////////////////
 
 // const message =
 //   totalUpVotes > votesFalse
@@ -30,7 +32,7 @@ btn.addEventListener("click", function () {
 // const temp_str = `Current fact is "${str.toUpperCase()}"`;
 // console.log(temp_str);
 
-// //Arrow functions
+////////////// ARROW FUNCTIONS ///////////////////////
 
 // function calcAge(year) {
 //   const currentYear = new Date().getFullYear();
@@ -52,3 +54,21 @@ btn.addEventListener("click", function () {
 //     : `The year ${year} not posisble, pls chek the year!`;
 
 // console.log(arrowAge(2027));
+
+// ARRAY OPERATIONS//////////////////////////////////
+
+// const details = ["Pramodya", 24, false]; //simple array creation
+// console.log(details[0]); //fetch data from array
+// console.log(details[details.length - 1]); //fetch data from array
+
+// const [names, age, isSelected] = details; //array decontruction
+// console.log(names);
+// console.log(age);
+// console.log(isSelected);
+
+// const newArray = [details, "Colombo"];
+// console.log(newArray); // output:  [Array(3), 'Colombo']
+// console.log(newArray.length); // Output: 2
+
+// const newSpreadArray = [...details, "Colombo"]; //use ... operator for extract the old array
+// console.log(newSpreadArray); //Output: ['Pramodya', 24, false, 'Colombo']
