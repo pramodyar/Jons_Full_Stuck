@@ -11,7 +11,7 @@ btn.addEventListener("click", function () {
   }
 });
 
-// //THIS IS FOR THE TESTING AND NOTES/////////////////////////////
+// //THIS IS FOR THE TESTING AND NOTES/////////////////////////////////////////////
 
 // let votesInteresting = 20;
 // let votesMindBlowing = 5;
@@ -19,7 +19,7 @@ btn.addEventListener("click", function () {
 
 // let totalUpVotes = votesInteresting + votesMindBlowing;
 
-/////////TERNARY OPERATOR///////////////////////////
+/////////TERNARY OPERATOR///////////////////////////////////////////////////////////
 
 // const message =
 //   totalUpVotes > votesFalse
@@ -32,7 +32,7 @@ btn.addEventListener("click", function () {
 // const temp_str = `Current fact is "${str.toUpperCase()}"`;
 // console.log(temp_str);
 
-////////////// ARROW FUNCTIONS ///////////////////////
+////////////// ARROW FUNCTIONS //////////////////////////////////////////////////////
 
 // function calcAge(year) {
 //   const currentYear = new Date().getFullYear();
@@ -55,7 +55,7 @@ btn.addEventListener("click", function () {
 
 // console.log(arrowAge(2027));
 
-// ARRAY OPERATIONS//////////////////////////////////
+// ARRAY OPERATIONS/////////////////////////////////////////////////////////////////////////////////////
 
 // const details = ["Pramodya", 24, false]; //simple array creation
 // console.log(details[0]); //fetch data from array
@@ -72,3 +72,24 @@ btn.addEventListener("click", function () {
 
 // const newSpreadArray = [...details, "Colombo"]; //use ... operator for extract the old array
 // console.log(newSpreadArray); //Output: ['Pramodya', 24, false, 'Colombo']
+
+//// JAVASCRIPT OBJECTS ///////////////////////////////////////////////////////////////////////////////////
+
+// //create an object
+// const personObj = {
+//   name: "Pramodya",
+//   age: 24,
+//   isPass: false,
+//   //create a method
+//   summary() {
+//     return `Name is ${this.name} and Age is ${this.age} yeras old.`; // 'this' keyword reffer to current object
+//   },
+// };
+
+// console.log(personObj); //fetch value from the object
+// console.log(personObj.name); //Output: Pramodya
+// console.log(personObj["name"]); //Output: Pramodya - This method idial for calculation
+
+// const { name, isPass } = personObj; //Object decontructing, the variable names shoud same as properrty name
+// console.log(name, isPass); //Output: Pramodya false
+// console.log(personObj.summary()); //Output: Name is Pramodya and Age is 24 yeras old.
