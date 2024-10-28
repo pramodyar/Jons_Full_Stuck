@@ -13,42 +13,42 @@ btn.addEventListener("click", function () {
 
 // THIS IS FOR THE TESTING...................................................
 
-let votesInteresting = 20;
-let votesMindBlowing = 5;
-let votesFalse = 16;
+// let votesInteresting = 20;
+// let votesMindBlowing = 5;
+// let votesFalse = 16;
 
-let totalUpVotes = votesInteresting + votesMindBlowing;
+// let totalUpVotes = votesInteresting + votesMindBlowing;
 
-const message =
-  totalUpVotes > votesFalse
-    ? "The Fact is True"
-    : "The Fact is most likley falsy, check more sources!";
+// const message =
+//   totalUpVotes > votesFalse
+//     ? "The Fact is True"
+//     : "The Fact is most likley falsy, check more sources!";
 
-console.log(message);
+// console.log(message);
 
-const str = "Lisbon is the capitol of the portugal";
-const temp_str = `Current fact is "${str.toUpperCase()}"`;
-console.log(temp_str);
+// const str = "Lisbon is the capitol of the portugal";
+// const temp_str = `Current fact is "${str.toUpperCase()}"`;
+// console.log(temp_str);
 
-//Arrow functions
+// //Arrow functions
 
-function calcAge(year) {
-  const currentYear = new Date().getFullYear();
-  const age = currentYear - year;
+// function calcAge(year) {
+//   const currentYear = new Date().getFullYear();
+//   const age = currentYear - year;
 
-  if (age > 0) {
-    return age;
-  } else {
-    return "Impposible Birth Year ";
-  }
-}
+//   if (age > 0) {
+//     return age;
+//   } else {
+//     return "Impposible Birth Year ";
+//   }
+// }
 
-const myAge = calcAge(2024);
-console.log(myAge);
+// const myAge = calcAge(2024);
+// console.log(myAge);
 
-const arrowAge = (year) =>
-  new Date().getFullYear() >= year
-    ? new Date().getFullYear() - year
-    : `The year ${year} not posisble, pls chek the year!`;
+// const arrowAge = (year) =>
+//   new Date().getFullYear() >= year
+//     ? new Date().getFullYear() - year
+//     : `The year ${year} not posisble, pls chek the year!`;
 
-console.log(arrowAge(2027));
+// console.log(arrowAge(2027));
