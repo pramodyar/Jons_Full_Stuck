@@ -88,8 +88,54 @@ btn.addEventListener("click", function () {
 
 // console.log(personObj); //fetch value from the object
 // console.log(personObj.name); //Output: Pramodya
-// console.log(personObj["name"]); //Output: Pramodya - This method idial for calculation
+// console.log(personObj["name"]); //Output: Pramodya // This method idial for calculation
 
 // const { name, isPass } = personObj; //Object decontructing, the variable names shoud same as properrty name
 // console.log(name, isPass); //Output: Pramodya false
 // console.log(personObj.summary()); //Output: Name is Pramodya and Age is 24 yeras old.
+
+///////LOOPING OVER ARRAYS: FOREACH AND MAP METHODS /////////////////////
+
+// // loop using forEach function - 'el' is the standard name for that variable
+// [1, 2, 3, 4, 5, 6, 7].forEach(function (el) {
+//   console.log(el);
+// });
+
+// [1, 2, 3, 4, 5, 6, 7].forEach((el) => console.log(el)); //use Arrow functions inted of regular
+
+// //// Loop using MAP  function
+// //map function return an array of looping values
+// // we can create a new array
+// const times10 = [2, 5, 6].map(function (el) {
+//   return el * 10;
+// });
+// console.log(times10); //Output: [2, 5, 6]
+
+// // using arrow function
+
+// const times20 = [2, 5, 6].map((el) => el * 20);
+// console.log(times20);
+
+// //extract values from some arrays and create a new array
+
+// const CATEGORIES = [
+//   { name: "technology", color: "#3b82f6" },
+//   { name: "science", color: "#16a34a" },
+//   { name: "finance", color: "#ef4444" },
+//   { name: "society", color: "#eab308" },
+//   { name: "entertainment", color: "#db2777" },
+//   { name: "health", color: "#14b8a6" },
+//   { name: "history", color: "#f97316" },
+//   { name: "news", color: "#8b5cf6" },
+// ];
+
+// const myCategories = CATEGORIES.map((el) => el.name);
+// console.log(myCategories);
+// // Output: ['technology', 'science', 'finance', 'society', 'entertainment', 'health', 'history', 'news']
+// myCategories.forEach((el) => console.log(el)); // Furtur exctrat 'myCategoris values
+
+// const myColors = CATEGORIES.map((el) => el.color);
+// console.log(myColors);
+// //Output: ['#3b82f6', '#16a34a', '#ef4444', '#eab308', '#db2777', '#14b8a6', '#f97316', '#8b5cf6']
+
+//.join(seperator)
