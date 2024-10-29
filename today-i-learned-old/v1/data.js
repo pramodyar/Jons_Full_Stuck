@@ -46,15 +46,3 @@ const initialFacts = [
 // LINK TO APP SAMPLE DATA: https://docs.google.com/spreadsheets/d/1eeldcA_OwP4DHYEvjG0kDe0cRys-cDPhc_E9P9G1e3I/edit#gid=0
 
 // 👍 🤯 ⛔️
-
-
-
-curl 'https://hzyfcgchsadlrhgfocao.supabase.co/rest/v1/facts' \
--H "apikey: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imh6eWZjZ2Noc2FkbHJoZ2ZvY2FvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MTQyNDYwMjksImV4cCI6MjAyOTgyMjAyOX0.rpNTijBByT2VFBSEDkHbTps1pC3jbAELcGPw_cIGRds" \
--H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imh6eWZjZ2Noc2FkbHJoZ2ZvY2FvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MTQyNDYwMjksImV4cCI6MjAyOTgyMjAyOX0.rpNTijBByT2VFBSEDkHbTps1pC3jbAELcGPw_cIGRds"
-
-
-
-curl 'https://aewaonvbgazfbpdmgftm.supabase.co/rest/v1/facts' \
--H "apikey: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFld2FvbnZiZ2F6ZmJwZG1nZnRtIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzAwOTc1MjYsImV4cCI6MjA0NTY3MzUyNn0.Zwy56Hx_S4yuyI5jHA08rWKisLHvuaONCTBMiNQ7_dA" \
--H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFld2FvbnZiZ2F6ZmJwZG1nZnRtIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzAwOTc1MjYsImV4cCI6MjA0NTY3MzUyNn0.Zwy56Hx_S4yuyI5jHA08rWKisLHvuaONCTBMiNQ7_dA"

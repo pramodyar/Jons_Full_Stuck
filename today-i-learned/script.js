@@ -11,7 +11,7 @@ btn.addEventListener("click", function () {
   }
 });
 
-// //THIS IS FOR THE TESTING AND NOTES/////////////////////////////////////////////
+// //THIS IS TESTING AND NOTES/////////////////////////////////////////////
 
 // let votesInteresting = 20;
 // let votesMindBlowing = 5;
