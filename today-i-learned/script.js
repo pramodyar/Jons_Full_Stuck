@@ -1,40 +1,10 @@
-const initialFacts = [
-  {
-    id: 1,
-    text: "React is being developed by Meta (formerly facebook)",
-    source: "https://opensource.fb.com/",
-    category: "technology",
-    votesInteresting: 24,
-    votesMindblowing: 9,
-    votesFalse: 4,
-    createdIn: 2021,
-  },
-  {
-    id: 2,
-    text: "Millennial dads spend 3 times as much time with their kids than their fathers spent with them. In 1982, 43% of fathers had never changed a diaper. Today, that number is down to 3%",
-    source:
-      "https://www.mother.ly/parenting/millennial-dads-spend-more-time-with-their-kids",
-    category: "society",
-    votesInteresting: 11,
-    votesMindblowing: 2,
-    votesFalse: 0,
-    createdIn: 2019,
-  },
-  {
-    id: 3,
-    text: "Lisbon is the capital of Portugal",
-    source: "https://en.wikipedia.org/wiki/Lisbon",
-    category: "society",
-    votesInteresting: 8,
-    votesMindblowing: 3,
-    votesFalse: 1,
-    createdIn: 2015,
-  },
-];
+// Selecting DOM Elements
 
 const btn = document.querySelector(".fact-btn");
 const form = document.querySelector(".fact-form");
 const factsList = document.querySelector(".facts-list");
+
+// Show/Hide Fact Form
 
 btn.addEventListener("click", function () {
   if (form.classList.contains("hidden")) {
@@ -47,6 +17,28 @@ btn.addEventListener("click", function () {
 });
 
 factsList.innerHTML = "";
+
+//Load Data From supabase
+
+loadFacts();
+
+async function loadFacts() {
+  const res = await fetch(
+    "https://aewaonvbgazfbpdmgftm.supabase.co/rest/v1/facts ",
+    {
+      headers: {
+        apikey:
+          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFld2FvbnZiZ2F6ZmJwZG1nZnRtIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzAwOTc1MjYsImV4cCI6MjA0NTY3MzUyNn0.Zwy56Hx_S4yuyI5jHA08rWKisLHvuaONCTBMiNQ7_dA",
+        authorization:
+          "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFld2FvbnZiZ2F6ZmJwZG1nZnRtIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzAwOTc1MjYsImV4cCI6MjA0NTY3MzUyNn0.Zwy56Hx_S4yuyI5jHA08rWKisLHvuaONCTBMiNQ7_dA",
+      },
+    }
+  );
+  const data = await res.json(); // make 'res' to JSON format
+  dataArray(data);
+}
+
+// Function for data manipulation
 
 function dataArray(datasource) {
   const html = datasource.map(
@@ -70,8 +62,6 @@ function dataArray(datasource) {
   // const allHtml = html.join("");
   // factsList.insertAdjacentHTML("beforeend", allHtml);
 }
-
-dataArray(initialFacts);
 
 // //THIS IS TESTING AND NOTES/////////////////////////////////////////////
 
