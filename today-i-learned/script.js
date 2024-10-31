@@ -4,6 +4,22 @@ const btn = document.querySelector(".fact-btn");
 const form = document.querySelector(".fact-form");
 const factsList = document.querySelector(".facts-list");
 
+const CATEGORIES = [
+  { name: "technology", color: "#3b82f6" },
+  { name: "science", color: "#16a34a" },
+  { name: "finance", color: "#ef4444" },
+  { name: "society", color: "#eab308" },
+  { name: "entertainment", color: "#db2777" },
+  { name: "health", color: "#14b8a6" },
+  { name: "history", color: "#f97316" },
+  { name: "news", color: "#8b5cf6" },
+];
+
+//// This is how to find correspoinding color value of each category
+
+//// const colorArray = CATEGORIES.find((cat) => cat.name == "technology").color;
+//// console.log(colorArray);
+
 // Show/Hide Fact Form
 
 btn.addEventListener("click", function () {
@@ -16,7 +32,7 @@ btn.addEventListener("click", function () {
   }
 });
 
-factsList.innerHTML = "";
+factsList.innerHTML = ""; // Initialy hide fact list elements
 
 //Load Data From supabase
 
@@ -35,6 +51,8 @@ async function loadFacts() {
     }
   );
   const data = await res.json(); // make 'res' to JSON format
+
+  // const fillData = data.filter((el) => el.category == "history"); //sort data
   dataArray(data);
 }
 
@@ -52,7 +70,9 @@ function dataArray(datasource) {
                     >(Source)</a
                   >
                 </p>
-                <span class="tag" style="background-color: #3b82f6"
+                <span class="tag" style="background-color:${
+                  CATEGORIES.find((cat) => cat.name == element.category).color
+                }"
                   >${element.category}</span
                 >`
   );
@@ -191,3 +211,12 @@ function dataArray(datasource) {
 // //Output: ['#3b82f6', '#16a34a', '#ef4444', '#eab308', '#db2777', '#14b8a6', '#f97316', '#8b5cf6']
 
 //.join(seperator)
+
+///////// DATA filer using filter() function ///////////////////////
+
+// console.log([1, 89, -6, 5, 52, 10, 0].filter((el) => el > 10));
+//OutPut:  [89,52]
+
+// // find() function  - sama as fileter function ,  insted of return array,  it returns only first value of array
+// console.log([1, 89, -6, 5, 52, 10, 0].find((el) => el > 10));
+// //Output: 89
