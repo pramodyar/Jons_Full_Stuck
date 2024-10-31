@@ -1,25 +1,45 @@
-import logo from './logo.svg';
-import './App.css';
+import "./style.css";
 
-function App() {
+function APP() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      {/*  HEADER */}
+      <Header />
+      <NewFactForm />
+      <main className="main">
+        <CategoryFilter />
+        <FactList />
+      </main>
+    </>
   );
 }
 
-export default App;
+// HEADER
+function Header() {
+  return (
+    <header className="header">
+      <div className="logo">
+        <img src="logo.png" alt="Today I Learned" />
+        <h1>Today I Learned</h1>
+      </div>
+      <button className="btn btn-large fact-btn">Share a fact</button>
+    </header>
+  );
+}
+
+//FACT FORM
+function NewFactForm() {
+  return <form className="fact-form">Fact Form</form>;
+}
+
+// FILETER BUTTONS
+function CategoryFilter() {
+  return <aside>Category Buttons</aside>;
+}
+
+//FACT LIST
+function FactList() {
+  return <section>Facts</section>;
+}
+
+export default APP;
