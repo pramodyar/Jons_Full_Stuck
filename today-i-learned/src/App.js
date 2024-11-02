@@ -52,20 +52,7 @@ function APP() {
 
   return (
     <>
-      {/*  HEADER */}
-      <header className="header">
-        <div className="logo">
-          <img src="logo.png" alt="Today I Learned" />
-          <h1>Fact Finder</h1>
-        </div>
-        <button
-          className="btn btn-large fact-btn"
-          //3. update state variable (This part is really necessary to re-render the react compononts, thsis a functin definition and not a function call )
-          onClick={() => setVisibility((cur) => !cur)}
-        >
-          Share a fact
-        </button>
-      </header>
+      <Header visible={visible} setVisibility={setVisibility} />
       {/* 2. use state variable */}
       {visible ? <NewFactForm /> : null}
       <main className="main">
@@ -80,6 +67,24 @@ function APP() {
       */}
       {/*  //////////////////////////////////////////// /////////////////////// */}
     </>
+  );
+}
+
+function Header({ visible, setVisibility }) {
+  return (
+    <header className="header">
+      <div className="logo">
+        <img src="logo.png" alt="Today I Learned" />
+        <h1>Fact Finder</h1>
+      </div>
+      <button
+        className="btn btn-large fact-btn"
+        //3. update state variable (This part is really necessary to re-render the react compononts, thsis a functin definition and not a function call )
+        onClick={() => setVisibility((cur) => !cur)}
+      >
+        {visible ? "Close" : "Sahre a Fact"}
+      </button>
+    </header>
   );
 }
 
