@@ -71,7 +71,7 @@ function dataArray(datasource) {
                   >
                 </p>
                 <span class="tag" style="background-color:${
-                  CATEGORIES.find((cat) => cat.name == element.category).color
+                  CATEGORIES.find((cat) => cat.name === element.category).color
                 }"
                   >${element.category}</span
                 >`
