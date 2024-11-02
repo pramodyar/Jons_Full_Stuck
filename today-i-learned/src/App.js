@@ -1,4 +1,5 @@
 import "./style.css";
+import { useState } from "react";
 
 const initialFacts = [
   {
@@ -46,29 +47,39 @@ const CATEGORIES = [
 ];
 
 function APP() {
+  // 1. Define state variable
+  const [visible, setVisibility] = useState(true);
+
   return (
     <>
       {/*  HEADER */}
-      <Header />
-      <NewFactForm />
+      <header className="header">
+        <div className="logo">
+          <img src="logo.png" alt="Today I Learned" />
+          <h1>Fact Finder</h1>
+        </div>
+        <button
+          className="btn btn-large fact-btn"
+          //3. update state variable (This part is really necessary to re-render the react compononts, thsis a functin definition and not a function call )
+          onClick={() => setVisibility((cur) => !cur)}
+        >
+          Share a fact
+        </button>
+      </header>
+      {/* 2. use state variable */}
+      {visible ? <NewFactForm /> : null}
       <main className="main">
         <CategoryFilter />
         <FactList />
       </main>
-    </>
-  );
-}
 
-// HEADER
-function Header() {
-  return (
-    <header className="header">
-      <div className="logo">
-        <img src="logo.png" alt="Today I Learned" />
-        <h1>Today I Learned</h1>
-      </div>
-      <button className="btn btn-large fact-btn">Share a fact</button>
-    </header>
+      {/*  //////////This is for  the testing perpose: /////////////////////// */}
+      {/* 
+      <Counter /> 
+      <Hide /> 
+      */}
+      {/*  //////////////////////////////////////////// /////////////////////// */}
+    </>
   );
 }
 
@@ -79,7 +90,25 @@ function NewFactForm() {
 
 // FILETER BUTTONS
 function CategoryFilter() {
-  return <aside>Category Buttons</aside>;
+  return (
+    <aside>
+      <ul>
+        <li>
+          <button className="btn btn-all-categories">ALL</button>
+        </li>
+        {CATEGORIES.map((cat) => (
+          <li className="Category" key={cat.name}>
+            <button
+              className="btn btn-category"
+              style={{ backgroundColor: cat.color }}
+            >
+              {cat.name}
+            </button>
+          </li>
+        ))}
+      </ul>
+    </aside>
+  );
 }
 
 //FACT LIST
@@ -97,6 +126,7 @@ function FactList() {
           <Fact fact={el} key={el.id} /> //passing values via props
         ))}
       </ul>
+      <p>Thre are {fact.length} facts in the Databse, add your-own!</p>
     </section>
   );
 }
@@ -135,3 +165,39 @@ function Fact({ fact }) {
 }
 
 export default APP;
+
+/////// simple count function for learn Ract 'State' concept
+
+// function Counter() {
+//   const [state, setCount] = useState(0); // useState() returns an array: [state_value, function]
+
+//   return (
+//     <div>
+//       <span style={{ fontSize: "24px" }}>Count:{state} </span>
+//       <button
+//         className="btn btn-large"
+//         onClick={() => setCount((current) => current + 1)}
+//       >
+//         Click ME!
+//       </button>
+//     </div>
+//   );
+// }
+
+// function Hide() {
+//   const [state, setVisibility] = useState(false); // useState() returns an array: [state_value, function]
+//   return (
+//     <div>
+//       {state ? (
+//         <span style={{ fontSize: "24px" }}>THIS IS SIMPE FORM FIELD</span>
+//       ) : null}
+
+//       <button
+//         className="btn btn-large"
+//         onClick={() => setVisibility((cur) => !cur)}
+//       >
+//         Click ME!
+//       </button>
+//     </div>
+//   );
+// }
