@@ -94,37 +94,43 @@ function FactList() {
         if you want to write JS code inside in JSX, should use: {your_JS_code }*/}
 
         {fact.map((el) => (
-          <li key={el.id} className="fact">
-            <p>
-              {el.text}
-              <a
-                className="source"
-                href={el.source}
-                target="_blank"
-                rel="noreferrer"
-              >
-                (Source)
-              </a>
-            </p>
-            <span
-              className="tag"
-              style={{
-                backgroundColor: CATEGORIES.find(
-                  (cat) => cat.name === el.category
-                ).color,
-              }}
-            >
-              {el.category}
-            </span>
-            <div className="vote-buttons">
-              <button>👍 {el.votesInteresting}</button>
-              <button>🤯 {el.votesMindblowing}</button>
-              <button>⛔️ {el.votesFalse}</button>
-            </div>
-          </li>
+          <Fact fact={el} key={el.id} /> //passing values via props
         ))}
       </ul>
     </section>
+  );
+}
+
+function Fact({ fact }) {
+  //////////// //☝this is equivilent to:  const {fact} = props
+  return (
+    <li className="fact">
+      <p>
+        {fact.text}
+        <a
+          className="source"
+          href={fact.source}
+          target="_blank"
+          rel="noreferrer"
+        >
+          (Source)
+        </a>
+      </p>
+      <span
+        className="tag"
+        style={{
+          backgroundColor: CATEGORIES.find((cat) => cat.name === fact.category)
+            .color,
+        }}
+      >
+        {fact.category}
+      </span>
+      <div className="vote-buttons">
+        <button>👍 {fact.votesInteresting}</button>
+        <button>🤯 {fact.votesMindblowing}</button>
+        <button>⛔️ {fact.votesFalse}</button>
+      </div>
+    </li>
   );
 }
 
