@@ -48,24 +48,17 @@ const CATEGORIES = [
 
 function APP() {
   // 1. Define state variable
-  const [visible, setVisibility] = useState(true);
+  const [visible, setVisibility] = useState(false);
 
   return (
     <>
-      <Header visible={visible} setVisibility={setVisibility} />
       {/* 2. use state variable */}
+      <Header visible={visible} setVisibility={setVisibility} />
       {visible ? <NewFactForm /> : null}
       <main className="main">
         <CategoryFilter />
         <FactList />
       </main>
-
-      {/*  //////////This is for  the testing perpose: /////////////////////// */}
-      {/* 
-      <Counter /> 
-      <Hide /> 
-      */}
-      {/*  //////////////////////////////////////////// /////////////////////// */}
     </>
   );
 }
@@ -90,7 +83,50 @@ function Header({ visible, setVisibility }) {
 
 //FACT FORM
 function NewFactForm() {
-  return <form className="fact-form">Fact Form</form>;
+  const [text, setText] = useState("");
+  const [source, setSource] = useState("");
+  const [category, setCategory] = useState("");
+  const textLength = text.length;
+
+  function handleSubmit(e) {
+    e.preventDefault();
+  }
+
+  return (
+    <form className="fact-form" onSubmit={handleSubmit}>
+      <input
+        type="text"
+        name=""
+        id=""
+        placeholder="Share a fact with the world..."
+        value={text}
+        onChange={(e) => setText(e.target.value)}
+      />
+      <span>{200 - textLength}</span>
+      <input
+        type="text"
+        name=""
+        id=""
+        placeholder="Thrustworthy source.."
+        value={source}
+        onChange={(e) => setSource(e.target.value)}
+      />
+      <select
+        name=""
+        id=""
+        value={category}
+        onChange={(e) => setCategory(e.target.value)}
+      >
+        <option value="">Choose Category: </option>
+        {CATEGORIES.map((cat) => (
+          <option key={cat.name} value={cat.name}>
+            {cat.name.toUpperCase()}
+          </option>
+        ))}
+      </select>
+      <button className="btn btn-large">Submit</button>
+    </form>
+  );
 }
 
 // FILETER BUTTONS
@@ -206,3 +242,7 @@ export default APP;
 //     </div>
 //   );
 // }
+
+///// for use above code snippits add thise two line in APP() fucntion
+//// <Counter />
+//// <Hide />
