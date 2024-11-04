@@ -53,26 +53,36 @@ function APP() {
   const [visible, setVisibility] = useState(false); //state for form visibilty
   const [facts, setFact] = useState([]); // state for fact list which is get from (local or supabase)
   const [isLoading, setIsLoading] = useState(false); //state for Loarding... message
+  const [currentCategoty, setCategory] = useState("all"); //state for select category button
 
-  useEffect(function () {
-    // ☝this called useEffect() hook
-    async function getFacts() {
-      // we manually create this getFacts() fucntion,becouse 'await' can't excist outside of an 'async' function
-      setIsLoading(true);
-      const { data: facts, error } = await supabase
-        .from("facts")
-        .select("*")
-        .order("votesInteresting", { ascending: false })
-        .limit(1000); //change fact list order (those methods are similer to  SQL queries) and limit number of queries get loaded
+  useEffect(
+    function () {
+      // ☝this called useEffect() hook
+      async function getFacts() {
+        // we manually create this getFacts() fucntion,becouse 'await' can't excist outside of an 'async' function
+        setIsLoading(true);
 
-      if (!error) {
-        setIsLoading(false);
-        setFact(facts);
-      } else alert("Somthing goes wrong!");
-    }
-    getFacts();
-  }, []); //add empty array to end for  stop fetchching  data ,when everytime redering the UI. fetch data only at startup
+        let query = supabase.from("facts").select("*"); // not loading data, just make a common query
+        if (currentCategoty !== "all") {
+          query = query.eq("category", currentCategoty); // not loading data, just make a common query
+        }
 
+        const { data: facts, error } = await query //fetch data using conditionaly builded query
+          .order("votesInteresting", { ascending: false })
+          .limit(1000);
+        //change fact list order (those methods are similer to  SQL queries) and limit number of queries get loaded
+
+        if (!error) {
+          setIsLoading(false);
+          setFact(facts);
+        } else alert("Somthing goes wrong!");
+      }
+      getFacts();
+    },
+    [currentCategoty]
+  ); //☝This is the defendancy  array. If we add empty array to end for it will stop fetchching data ,when everytime redering the UI.
+  //fetch data  once at only startup
+  // But if we add a some state variable here , based on the state, data get reloard from server
   return (
     <>
       {/* 2. use state variable */}
@@ -81,7 +91,7 @@ function APP() {
         <NewFactForm setFact={setFact} setVisibility={setVisibility} />
       ) : null}
       <main className="main">
-        <CategoryFilter />
+        <CategoryFilter setCategory={setCategory} />
         {/* check data is loading or not conditionaly */}
         {isLoading ? <LoadingMsg /> : <FactList facts={facts} />}
       </main>
@@ -208,18 +218,28 @@ function NewFactForm({ setFact, setVisibility }) {
 }
 
 // FILETER BUTTONS
-function CategoryFilter() {
+function CategoryFilter({ setCategory }) {
   return (
     <aside>
       <ul>
         <li>
-          <button className="btn btn-all-categories">ALL</button>
+          <button
+            className="btn btn-all-categories"
+            onClick={() => {
+              setCategory("all");
+            }}
+          >
+            ALL
+          </button>
         </li>
         {CATEGORIES.map((cat) => (
           <li className="Category" key={cat.name}>
             <button
               className="btn btn-category"
               style={{ backgroundColor: cat.color }}
+              onClick={() => {
+                setCategory(cat.name); //set category for filtering data
+              }}
             >
               {cat.name}
             </button>
@@ -232,6 +252,15 @@ function CategoryFilter() {
 
 //FACT LIST
 function FactList({ facts }) {
+  if (facts.length === 0) {
+    return (
+      <p className="loadingMsg">
+        There are no data in this category, you can add the first one!
+      </p>
+    );
+  }
+  // In Javascritp function if we return somthing, then the rest of the code not even executed
+  // so we do not need add else block here
   return (
     <section>
       <ul className="facts-list">
