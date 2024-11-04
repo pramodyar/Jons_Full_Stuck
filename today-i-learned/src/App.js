@@ -50,15 +50,25 @@ const CATEGORIES = [
 
 function APP() {
   // 1. Define state variable
-  const [visible, setVisibility] = useState(false);
-  const [facts, setFact] = useState([]);
+  const [visible, setVisibility] = useState(false); //state for form visibilty
+  const [facts, setFact] = useState([]); // state for fact list which is get from (local or supabase)
+  const [isLoading, setIsLoading] = useState(false); //state for Loarding... message
 
   useEffect(function () {
     // ☝this called useEffect() hook
     async function getFacts() {
       // we manually create this getFacts() fucntion,becouse 'await' can't excist outside of an 'async' function
-      const { data: facts, error } = await supabase.from("facts").select("*");
-      setFact(facts);
+      setIsLoading(true);
+      const { data: facts, error } = await supabase
+        .from("facts")
+        .select("*")
+        .order("votesInteresting", { ascending: false })
+        .limit(1000); //change fact list order (those methods are similer to  SQL queries) and limit number of queries get loaded
+
+      if (!error) {
+        setIsLoading(false);
+        setFact(facts);
+      } else alert("Somthing goes wrong!");
     }
     getFacts();
   }, []); //add empty array to end for  stop fetchching  data ,when everytime redering the UI. fetch data only at startup
@@ -72,7 +82,8 @@ function APP() {
       ) : null}
       <main className="main">
         <CategoryFilter />
-        <FactList facts={facts} />
+        {/* check data is loading or not conditionaly */}
+        {isLoading ? <LoadingMsg /> : <FactList facts={facts} />}
       </main>
     </>
   );
@@ -108,6 +119,10 @@ function isValidHttpUrl(string) {
   }
 
   return url.protocol === "http:" || url.protocol === "https:";
+}
+
+function LoadingMsg() {
+  return <p className="loadingMsg">Loading...</p>;
 }
 
 //FACT FORM

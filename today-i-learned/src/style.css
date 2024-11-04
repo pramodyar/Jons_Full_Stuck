@@ -41,6 +41,12 @@ body {
 .hidden {
   display: none !important; /*Enforce for take precident*/
 }
+.loadingMsg {
+  font-size: 32px;
+  font-weight: 600;
+  text-align: center;
+  margin-top: 24px;
+}
 
 @media (max-width: 900px) {
   .main {
