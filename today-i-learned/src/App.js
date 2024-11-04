@@ -1,5 +1,7 @@
+import { useEffect, useState } from "react";
+import supabase from "./supabase";
+
 import "./style.css";
-import { useState } from "react";
 
 const initialFacts = [
   {
@@ -49,7 +51,17 @@ const CATEGORIES = [
 function APP() {
   // 1. Define state variable
   const [visible, setVisibility] = useState(false);
-  const [facts, setFact] = useState(initialFacts);
+  const [facts, setFact] = useState([]);
+
+  useEffect(function () {
+    // ☝this called useEffect() hook
+    async function getFacts() {
+      // we manually create this getFacts() fucntion,becouse 'await' can't excist outside of an 'async' function
+      const { data: facts, error } = await supabase.from("facts").select("*");
+      setFact(facts);
+    }
+    getFacts();
+  }, []); //add empty array to end for  stop fetchching  data ,when everytime redering the UI. fetch data only at startup
 
   return (
     <>
