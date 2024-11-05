@@ -140,9 +140,10 @@ function NewFactForm({ setFact, setVisibility }) {
   const [text, setText] = useState("");
   const [source, setSource] = useState("https://sample.com");
   const [category, setCategory] = useState("");
+  const [isUpLoading, setISUpLoading] = useState(false); // this disable form fiels and buttons while uploading data
   const textLength = text.length;
 
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     // This function is declared inside onSubmit fucntion and function definition are here
     // 1. Prevent browser reload
     e.preventDefault();
@@ -155,20 +156,29 @@ function NewFactForm({ setFact, setVisibility }) {
       category &&
       textLength < 200
     ) {
-      // the condition include falsy values, so if theyon their default values this block is not excecuted
-      // 3. Create a new fact
-      const newFact = {
-        id: Math.round(Math.random() * 1000000),
-        text,
-        source,
-        category,
-        votesInteresting: 0,
-        votesMindblowing: 0,
-        votesFalse: 0,
-        createdIn: new Date().getFullYear(),
-      };
+      // the condition include falsy values, so if they on their default values this block is not excecuted
+      // 3. Create a new fact (for the Local development)
+      // const newFact = {
+      //   id: Math.round(Math.random() * 1000000),
+      //   text,   //actual syntax is: text:text but name is same in both key and value, therfore iedntifire use once only
+      //   source,
+      //   category,
+      //   votesInteresting: 0,
+      //   votesMindblowing: 0,
+      //   votesFalse: 0,
+      //   createdIn: new Date().getFullYear(),
+      // };
+      // 3. Upload fact to  supabase and receive the new fact object
+
+      setISUpLoading(true);
+      const { data: newFact, error } = await supabase
+        .from("facts")
+        .insert([{ text, source, category }])
+        .select();
+      setISUpLoading(false);
+
       // 4. Add the new fact to the UI: add the fact to state
-      setFact((facts) => [newFact, ...facts]); //make one array using newFact and extracting facts array
+      setFact((facts) => [newFact[0], ...facts]); //make one array using newFact and extracting facts array
 
       //5. Reset input fields
       setText("");
@@ -189,6 +199,7 @@ function NewFactForm({ setFact, setVisibility }) {
         placeholder="Share a fact with the world..."
         value={text}
         onChange={(e) => setText(e.target.value)}
+        disabled={isUpLoading} // disable input fiels while uploading data
       />
       <span>{200 - textLength}</span>
       <input
@@ -198,12 +209,14 @@ function NewFactForm({ setFact, setVisibility }) {
         placeholder="Thrustworthy source.."
         value={source}
         onChange={(e) => setSource(e.target.value)}
+        disabled={isUpLoading} // disable input fiels while uploading data
       />
       <select
         name=""
         id=""
         value={category}
         onChange={(e) => setCategory(e.target.value)}
+        disabled={isUpLoading} // disable input fiels while uploading data
       >
         <option value="">Choose Category: </option>
         {CATEGORIES.map((cat) => (
@@ -212,7 +225,9 @@ function NewFactForm({ setFact, setVisibility }) {
           </option>
         ))}
       </select>
-      <button className="btn btn-large">Submit</button>
+      <button className="btn btn-large" disabled={isUpLoading}>
+        Submit
+      </button>
     </form>
   );
 }
