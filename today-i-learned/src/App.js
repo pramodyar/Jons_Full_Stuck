@@ -93,7 +93,11 @@ function APP() {
       <main className="main">
         <CategoryFilter setCategory={setCategory} />
         {/* check data is loading or not conditionaly */}
-        {isLoading ? <LoadingMsg /> : <FactList facts={facts} />}
+        {isLoading ? (
+          <LoadingMsg />
+        ) : (
+          <FactList facts={facts} setFact={setFact} />
+        )}
       </main>
     </>
   );
@@ -168,6 +172,7 @@ function NewFactForm({ setFact, setVisibility }) {
       //   votesFalse: 0,
       //   createdIn: new Date().getFullYear(),
       // };
+
       // 3. Upload fact to  supabase and receive the new fact object
 
       setISUpLoading(true);
@@ -178,7 +183,7 @@ function NewFactForm({ setFact, setVisibility }) {
       setISUpLoading(false);
 
       // 4. Add the new fact to the UI: add the fact to state
-      setFact((facts) => [newFact[0], ...facts]); //make one array using newFact and extracting facts array
+      if (!error) setFact((facts) => [newFact[0], ...facts]); //make one array using newFact and extracting facts array
 
       //5. Reset input fields
       setText("");
@@ -266,7 +271,7 @@ function CategoryFilter({ setCategory }) {
 }
 
 //FACT LIST
-function FactList({ facts }) {
+function FactList({ facts, setFact }) {
   if (facts.length === 0) {
     return (
       <p className="loadingMsg">
@@ -282,8 +287,8 @@ function FactList({ facts }) {
         {/*//   {} <--- This enabled Java script mode in JSX , 
         if you want to write JS code inside in JSX, should use: {your_JS_code }*/}
 
-        {facts.map((el) => (
-          <Fact fact={el} key={el.id} /> //passing values via props
+        {facts.map((fact) => (
+          <Fact fact={fact} setFact={setFact} key={fact.id} /> //passing values to child elements  via props    APP >>> factList >>> Fact
         ))}
       </ul>
       <p>Thre are {facts.length} facts in the Databse, add your-own!</p>
@@ -291,8 +296,32 @@ function FactList({ facts }) {
   );
 }
 
-function Fact({ fact }) {
+function Fact({ fact, setFact }) {
   //////////// //☝this is equivilent to:  const {fact} = props
+
+  const [isUpdating, setIsUpdating] = useState(false); // disble buttons while updating the votes
+
+  async function handleVote(columnName) {
+    setIsUpdating(true);
+    const { data: updatedFact, error } = await supabase
+      .from("facts")
+      .update({ [columnName]: fact[columnName] + 1 }) // fact.votesInteresting === fact["votesInteresting"]  the 2nd methos of get properties from object
+      .eq("id", fact.id) // add to the right column based on ID
+      .select();
+    setIsUpdating(false);
+
+    if (!error)
+      setFact((facts) =>
+        facts.map((f) => (f.id === fact.id ? updatedFact[0] : f))
+      );
+    //************ Confusing part ////////////
+    // Think this way: wahtever retun the  insied of the setFatc() function, will be the new state.
+    // so inside of the setFact(<)-----the inside function  must return a array, we want to retun new array that same size as previous one.
+    //if we use previos method [newFact,...facts] thsi will give a bigger array than previos one.
+    //so in this point it's good idea to use map() method create an array that is same size as the previous one
+    //map() create an new array with the same length as before
+  }
+
   return (
     <li className="fact">
       <p>
@@ -316,9 +345,24 @@ function Fact({ fact }) {
         {fact.category}
       </span>
       <div className="vote-buttons">
-        <button>👍 {fact.votesInteresting}</button>
-        <button>🤯 {fact.votesMindblowing}</button>
-        <button>⛔️ {fact.votesFalse}</button>
+        <button
+          onClick={() => handleVote("votesInteresting")} // this is not call fucntion. React call the function whenever he want, this is just pass the arguments
+          disabled={isUpdating}
+        >
+          👍 {fact.votesInteresting}
+        </button>
+        <button
+          onClick={() => handleVote("votesMindblowing")} // this is not call fucntion. React call the function whenever he want, this is just pass the arguments
+          disabled={isUpdating}
+        >
+          🤯 {fact.votesMindblowing}
+        </button>
+        <button
+          onClick={() => handleVote("votesFalse")} // this is not call fucntion. React call the function whenever he want, this is just pass the arguments
+          disabled={isUpdating}
+        >
+          ⛔️ {fact.votesFalse}
+        </button>
       </div>
     </li>
   );
