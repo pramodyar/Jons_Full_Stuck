@@ -142,7 +142,7 @@ function LoadingMsg() {
 //FACT FORM
 function NewFactForm({ setFact, setVisibility }) {
   const [text, setText] = useState("");
-  const [source, setSource] = useState("https://sample.com");
+  const [source, setSource] = useState("");
   const [category, setCategory] = useState("");
   const [isUpLoading, setISUpLoading] = useState(false); // this disable form fiels and buttons while uploading data
   const textLength = text.length;
@@ -300,6 +300,8 @@ function Fact({ fact, setFact }) {
   //////////// //☝this is equivilent to:  const {fact} = props
 
   const [isUpdating, setIsUpdating] = useState(false); // disble buttons while updating the votes
+  const isDisputed =
+    fact.votesInteresting + fact.votesMindblowing < fact.votesFalse;
 
   async function handleVote(columnName) {
     setIsUpdating(true);
@@ -324,6 +326,7 @@ function Fact({ fact, setFact }) {
 
   return (
     <li className="fact">
+      {isDisputed ? <span className="disputed">[⛔ DISPUTED]</span> : null}
       <p>
         {fact.text}
         <a
