@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Coiny&family=Sono:wght@200..800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <title>The Fact Checker</title>
+  </head>
+  <body>
+    <header class="header">
+      <div class="logo">
+        <img src="logo.png" alt="" />
+        <h1>The Fact Checker</h1>
+      </div>
+      <button class="btn btn-large" id="form-button">Create a Fact</button>
+    </header>
+    <form action="" class="fact-form hidden">
+      <input
+        type="text"
+        name=""
+        id=""
+        placeholder="Share a fact with world..."
+      />
+      <span class="word-counter">200</span>
+      <input type="text" name="" id="" placeholder="Trustworthy Source..." />
+      <select name="" id="">
+        <option value="">Choose Category:</option>
+        <option value="">Technology</option>
+        <option value="">Science</option>
+        <option value="">Finance</option>
+      </select>
+      <button class="btn" type="submit">Submit</button>
+    </form>
+    <main class="main">
+      <aside>
+        <ul class="Category-list">
+          <li class="category-items">
+            <button class="btn btn-category-all category-button">ALL</button>
+          </li>
+          <li class="category-items">
+            <button class="btn btn-category">Technology</button>
+          </li>
+          <li class="category-items">
+            <button class="btn btn-category">Science</button>
+          </li>
+        </ul>
+      </aside>
+      <section>
+        <ul class="fact-list">
+          <li class="fact">
+            <p>
+              React is being developed by Meta (formerly facebook)<a
+                class="source"
+                href="https:\\google.com"
+                target="_blank"
+                >(Source)</a
+              >
+            </p>
+            <span class="tag">Category</span>
+            <div class="vote-buttons">
+              <button class="vote-button">👍&nbsp;09</button>
+              <button class="vote-button">🤯&nbsp;11</button>
+              <button class="vote-button">⛔️&nbsp;30</button>
+            </div>
+          </li>
+          <li class="fact">
+            <p>
+              The shortest war in history lasted 38 minutes! It was between
+              Britain and Zanzibar on August 27, 1896. It was over the ascension
+              of the next Sultan in Zanzibar and resulted in a British
+              victory.<a
+                class="source"
+                href="https:\\google.com"
+                target="_blank"
+                >(Source)</a
+              >
+            </p>
+
+            <span class="tag">Category</span>
+            <div class="vote-buttons">
+              <button class="vote-button">👍&nbsp;29</button>
+              <button class="vote-button">🤯&nbsp;11</button>
+              <button class="vote-button">⛔️&nbsp;4</button>
+            </div>
+          </li>
+          <li class="fact">
+            <p>
+              Millennial dads spend 3 times as much time with their kids than
+              their fathers spent with them. In 1982, 43% of fathers had never
+              changed a diaper. Today, that number is down to 3%
+              <a class="source" href="https:\\google.com" target="_blank"
+                >(Source)</a
+              >
+            </p>
+
+            <span class="tag">Category</span>
+            <div class="vote-buttons">
+              <button class="vote-button">👍&nbsp;15</button>
+              <button class="vote-button">🤯&nbsp;10</button>
+              <button class="vote-button">⛔️&nbsp;8</button>
+            </div>
+          </li>
+        </ul>
+      </section>
+    </main>
+    <footer></footer>
+
+    <script src="script.js"></script>
+  </body>
+</html>

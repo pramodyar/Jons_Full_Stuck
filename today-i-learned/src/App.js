@@ -50,7 +50,7 @@ const CATEGORIES = [
 
 function APP() {
   // 1. Define state variable
-  const [visible, setVisibility] = useState(false); //state for form visibilty
+  const [visible, setVisibility] = useState(false); //state for form visibilty (useState() itself a funtion  and it returns and array)
   const [facts, setFact] = useState([]); // state for fact list which is get from (local or supabase)
   const [isLoading, setIsLoading] = useState(false); //state for Loarding... message
   const [currentCategoty, setCategory] = useState("all"); //state for select category button
